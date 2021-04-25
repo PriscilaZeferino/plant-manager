@@ -15,7 +15,7 @@ import { Button } from '../components/button'
 
 import {useRoute} from '@react-navigation/core'
 import { format, isBefore } from 'date-fns'
-import { PlantProps, savePlant, lo, loadPlant } from '../libs/storage'
+import { PlantProps, savePlant, loadPlant } from '../libs/storage'
 
 interface Params {
     plant: PlantProps
