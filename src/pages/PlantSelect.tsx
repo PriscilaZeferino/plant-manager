@@ -11,6 +11,7 @@ import {Header} from '../components/Header';
 import { EnviromentButton } from '../components/EnviromentButton';
 import { PlantCardPrimary } from '../components/PlantCardPrimary';
 import {Load} from '../components/Load'
+import { useNavigation } from '@react-navigation/native';
 
 interface EnviromentProps {
     key: string,
@@ -45,7 +46,8 @@ export function PlantSelect(){
 
     const [page, setPage] = useState(1);
     const [loadingMore, setLoadingMore] = useState(false);
-    const [loadedAll, setLoadedAll] = useState(false);
+
+    const navigation = useNavigation();
 
     function handleEnviromentsSelected (environments: string) {
         setEnviromentsSelected(environments);
@@ -88,7 +90,10 @@ export function PlantSelect(){
         setLoading(false)
         setLoadingMore(false)
 
+    }
 
+    function handlePlantSelected (plant: PlantsProps) {
+        navigation.navigate('PlantSave', {plant});
     }
 
     useEffect(() => 
@@ -124,6 +129,7 @@ export function PlantSelect(){
                 <View>
                     <FlatList 
                         data={enviroments} 
+                        keyExtractor={item=> String(item.key)}
                         renderItem={({item})=> (
                             <EnviromentButton 
                                 title={item.title}
@@ -143,7 +149,10 @@ export function PlantSelect(){
                         data={filteredPlants}
                         keyExtractor={item=> String(item.id)}
                         renderItem={({item})=> (
-                            <PlantCardPrimary data={item}/>
+                            <PlantCardPrimary 
+                                data={item}
+                                onPress = {() => handlePlantSelected(item)}
+                            />
                         )}
                         showsVerticalScrollIndicator={false}
                         numColumns={2}
