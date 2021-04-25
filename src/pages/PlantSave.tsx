@@ -16,6 +16,7 @@ import { Button } from '../components/button'
 import {useRoute} from '@react-navigation/core'
 import { format, isBefore } from 'date-fns'
 import { PlantProps, savePlant, loadPlant } from '../libs/storage'
+import { useNavigation } from '@react-navigation/native'
 
 interface Params {
     plant: PlantProps
@@ -24,6 +25,8 @@ export function PlantSave () {
 
     const route = useRoute();
     const {plant} = route.params as Params;
+
+    const navigation = useNavigation();
 
     const [selectedDateTime, setSelectedDateTime] = useState(new Date());
     const [showDatePicker, setShowDatePicker] = useState(Platform.OS === 'ios')
@@ -51,7 +54,15 @@ export function PlantSave () {
             await savePlant({
                 ...plant,
                 dateTimeNotification: selectedDateTime
-            })
+            });
+
+            navigation.navigate('Confirmation', {
+                title: 'Tudo certo',
+                subtitle: 'Fique tranquilo que sempre vamos lembrar você de cuidar da sua plantinha com muito cuidado',
+                buttonTitle: 'Muito obrigado xD',
+                icon: 'hug',
+                nextScreen: 'MyPlants'
+            });
         }
         catch {
             Alert.alert('Não foi possivel salver. :/');
