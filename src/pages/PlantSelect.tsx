@@ -78,7 +78,7 @@ export function PlantSelect(){
 
     }
 
-    function handlePlantSelected (plant: PlantsProps) {
+    function handlePlantSelected (plant: PlantProps) {
         navigation.navigate('PlantSave', {plant});
     }
 
