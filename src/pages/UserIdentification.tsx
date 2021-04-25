@@ -1,5 +1,8 @@
 import React, {useState} from "react";
-import {SafeAreaView, StyleSheet, View, Text, TextInput, KeyboardAvoidingView, Platform, TouchableWithoutFeedback, Keyboard} from 'react-native';
+import {SafeAreaView, StyleSheet, View, Text, Alert, TextInput, KeyboardAvoidingView, Platform, TouchableWithoutFeedback, Keyboard} from 'react-native';
+
+import AsyncStorage from '@react-native-async-storage/async-storage'
+
 import colors from "../styles/colors";
 import fonts from "../styles/fonts";
 
@@ -26,9 +29,15 @@ export function UserIdentification() {
 
     function handleInputChange(value: string){
         setIsFilled(!!value);
-
+        setName(value);
     }
-    function handleSubmit() {
+    
+    async function handleSubmit() {
+
+        if(!name) 
+            return Alert.alert('Me diz como chamar você 😢');
+        
+        await AsyncStorage.setItem('@plantmanager:user', name);
         navigation.navigate('Confirmation');
     }
 
