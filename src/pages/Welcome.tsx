@@ -8,7 +8,7 @@ import colors from '../styles/colors';
 import fonts from '../styles/fonts';
 
 import {Feather} from '@expo/vector-icons';
-import { useNavigation } from "@react-navigation/core";
+import { useNavigation } from '@react-navigation/core';
 
 export function Welcome () {
 
@@ -36,6 +36,7 @@ export function Welcome () {
                 style={styles.button} 
                 activeOpacity={0.7}
                 onPress={handleStart}
+
             >
                     <Feather name="chevron-right" style={styles.buttonIcon}/>
             </TouchableOpacity>
@@ -44,13 +45,12 @@ export function Welcome () {
     )
 }
 
-const barHeight = getStatusBarHeight();
 const styles = StyleSheet.create ({
     container: {
         flex: 1,
         alignItems: 'center',
         justifyContent: 'space-around',
-        marginTop: barHeight
+        marginTop: getStatusBarHeight()
     },
     wrapper: {
         paddingHorizontal: 20,
