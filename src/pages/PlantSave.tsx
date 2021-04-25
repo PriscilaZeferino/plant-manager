@@ -15,7 +15,7 @@ import { Button } from '../components/button'
 
 import {useRoute} from '@react-navigation/core'
 import { format, isBefore } from 'date-fns'
-import { PlantProps } from '../libs/storage'
+import { PlantProps, savePlant, lo, loadPlant } from '../libs/storage'
 
 interface Params {
     plant: PlantProps
@@ -45,15 +45,26 @@ export function PlantSave () {
     function handleOpenDateTimePickerForAndroid () {
         setShowDatePicker(oldState => !oldState);
     }
+
+    async function handleSave() {
+        try {
+            await savePlant({
+                ...plant,
+                dateTimeNotification: selectedDateTime
+            })
+        }
+        catch {
+            Alert.alert('Não foi possivel salver. :/');
+        }
+    }
+
     return (
         <View style={styles.container}>
 
             <View style={styles.plantInfo}>
 
                 <SvgFromUri uri={plant.photo} height={150} width={150}/>
-
                 <Text style={styles.plantName}>{plant.name}</Text>
-
                 <Text style={styles.plantAbout}>{plant.about}</Text>
 
             </View>
@@ -86,7 +97,7 @@ export function PlantSave () {
                     )
                 }
 
-                <Button title="Cadastrar planta" onPress={() => {}}/>
+                <Button title="Cadastrar planta" onPress={handleSave}/>
 
             </View>
         </View>
