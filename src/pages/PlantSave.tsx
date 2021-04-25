@@ -70,14 +70,16 @@ export function PlantSave () {
     }
 
     return (
+        <ScrollView
+            showsVerticalScrollIndicator={false}
+            contentContainerStyle={styles.container}
+        >
+
         <View style={styles.container}>
-
             <View style={styles.plantInfo}>
-
                 <SvgFromUri uri={plant.photo} height={150} width={150}/>
                 <Text style={styles.plantName}>{plant.name}</Text>
                 <Text style={styles.plantAbout}>{plant.about}</Text>
-
             </View>
 
             <View style={styles.controller}>
@@ -112,6 +114,7 @@ export function PlantSave () {
 
             </View>
         </View>
+        </ScrollView>
     )
 }
 

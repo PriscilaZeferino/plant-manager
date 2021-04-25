@@ -11,6 +11,8 @@ import {pt} from 'date-fns/locale'
 
 import {SafeAreaView} from 'react-native-safe-area-context'
 import fonts from '../styles/fonts';
+import { PlantCardSecondary } from '../components/PlantCardSecondary';
+import { Load } from '../components/Load';
 
 export function MyPlants()
 {
@@ -28,7 +30,7 @@ export function MyPlants()
                 {locale: pt }
             )
 
-            setNextWatered(`Não esqueça de regar a ${plantsStoraged[0].name} à ${nextTime} horas.`)
+            setNextWatered(`Não esqueça de regar a ${plantsStoraged[0].name} aproximadamente ${nextTime} horas.`)
             setMyPlants(plantsStoraged);
             setLoading(false)
         };
@@ -36,6 +38,9 @@ export function MyPlants()
         loadStorageData();
 
     },[])
+
+    if(loading) 
+    return <Load/>
 
     return (
         <View style={styles.container}>
@@ -56,8 +61,10 @@ export function MyPlants()
                 <FlatList
                     data={myPlants}
                     keyExtractor={(item) => String(item.id)}
-                    renderItem={({item})=>(
-                        <Text>Elemento</Text>
+
+                    renderItem={({item})=> (
+                        <PlantCardSecondary data={item}/>
+
                     )}
                     showsHorizontalScrollIndicator={false}
                     contentContainerStyle={{flex: 1}}
@@ -93,7 +100,6 @@ const styles = StyleSheet.create({
         flex: 1,
         color: colors.blue,
         paddingHorizontal: 20,
-        textAlign: 'justify'
     },
     plants: {
         flex: 1,
