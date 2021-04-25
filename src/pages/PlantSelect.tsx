@@ -12,32 +12,18 @@ import { EnviromentButton } from '../components/EnviromentButton';
 import { PlantCardPrimary } from '../components/PlantCardPrimary';
 import {Load} from '../components/Load'
 import { useNavigation } from '@react-navigation/native';
+import { PlantProps } from '../libs/storage';
 
 interface EnviromentProps {
     key: string,
     title: string
 }
 
-
-interface PlantsProps {
-    id: string;
-    name: string;
-    about: string;
-    water_tips: string;
-    photo: string;
-    environments: [string];
-    frequency: {
-        times: number;
-        repeat_every: string;
-    }
-
-}
-
 export function PlantSelect(){
 
     const [enviroments, setEnviroments] = useState<EnviromentProps[]>([]);
-    const [plants, setPlants] = useState<PlantsProps[]>([]);
-    const [filteredPlants, setFilteredPlants] = useState<PlantsProps[]>([]);
+    const [plants, setPlants] = useState<PlantProps[]>([]);
+    const [filteredPlants, setFilteredPlants] = useState<PlantProps[]>([]);
 
     const [loading, setLoading] = useState(true);
 
