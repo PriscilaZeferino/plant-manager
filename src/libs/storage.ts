@@ -116,7 +116,7 @@ export async function removePlant(id:string) : Promise<void> {
 
     await Notifications.cancelScheduledNotificationAsync(plants[id].notificationsId);
 
-    delete plants[id]
+    delete plants[id];
 
     await AsyncStorage.setItem('@plantmanager:plants', JSON.stringify(plants));
 }
