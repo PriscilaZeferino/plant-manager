@@ -52,7 +52,6 @@ export function UserIdentification() {
             }
 
     }
-
     
     return(
         <SafeAreaView style={styles.container}>
